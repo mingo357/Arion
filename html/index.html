@@ -8,33 +8,6 @@
     <link rel="stylesheet" href="css/app.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="js/vendor/modernizr.js"></script>
-    <script>
-        $(function () {
-          $('.scrollto a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-
-              var target = $(this.hash);
-              target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-              if (target.length) {
-                $('html,body').animate({
-                  scrollTop: target.offset().top - 50
-                }, 1000);
-                return false;
-              }
-            }
-          });
-        });
-        $(document).ready(
-
-          function() { 
-
-            $("html").niceScroll();
-
-          }
-
-        );
-
-    </script>
   </head>
   <body>
       <div id="fullscreen-image" data-stellar-background-ratio="0.5" >
@@ -56,32 +29,32 @@
           <div class="row">
             <div class="large-12 columns">
               <label>Complete address</label>
-              <input name="address" type="text" placeholder="e.g. 845 Rue Sherbrooke O Montréal, QC H3A 0G4 Canada" />
+              <input class="address" type="text" placeholder="e.g. 845 Rue Sherbrooke O Montréal, QC H3A 0G4 Canada" />
             </div>
           </div>
           <div class="row">
             <div class="large-5 medium-5 columns">
               <label>Item</label>
-              <input name="item" type="text" placeholder="toothbrush" />
+              <input class="item" type="text" placeholder="1X Toothbrush" />
             </div>
             <div class="large-4 medium-4 columns">
               <label>Store</label>
-              <input name="store" type="text" placeholder="shoppers" />
+              <input class="store" type="text" placeholder="Shoppers" />
             </div>
             <div class="large-3 medium-3 columns">
               <label>Price willing to pay ($)</label>
-              <input "price" type="text" placeholder="5.00" />
+              <input class="price" type="text" placeholder="3.00" />
             </div>
           </div>
           <div class="row">
             <div class="large-12 columns">
               <label>Other specifications</label>
-              <textarea name="desc" placeholder="A blue one please!"></textarea>
+              <textarea class="desc" placeholder="Blue"></textarea>
             </div>
           </div>
           <div class="row">
               <div class="columns">
-                  <input class="button round info" type="submit" value="Send">
+                  <input class="button round info submit"  value="Send">
               </div>
 
           </div>
@@ -101,6 +74,27 @@
           });
       });
       $('a').smoothScroll();
+
+    $(document).on('click', '.submit', function(){
+        var address = $(".address").val();
+        var item = $(".item").val();
+        var store = $(".store").val();
+        var price = $(".price").val();
+        var desc = $(".desc").val();
+
+        $.ajax({
+            type: "POST",
+            url: "controllers/requestsController.php?add",
+            data: "address=" + address + "&item=" + item + "&store=" + store + "&price=" + price + "&desc=" + desc,
+            dataType: "script",
+            success: function( data, textStatus, jqxhr ){
+            console.log( data ); // Data returned
+            console.log( textStatus ); // Success
+            console.log( jqxhr.status ); // 200
+            console.log( "Load was performed." );
+            }
+        });
+    });
     </script>
   </body>
 </html>

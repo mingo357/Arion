@@ -1,6 +1,8 @@
 <?php
 
 require_once dirname(__FILE__) . "/../models/requestsModel.php";
+header('Content-Type: application/javascript; charset=utf-8');
+
 $Requests = new Requests();
 
 if (isset($_GET["add"])) {
@@ -11,9 +13,9 @@ if (isset($_GET["add"])) {
 	$time = time();
 	$desc = $_POST["desc"];
 	if (!preg_match("/[a-zA-Z0-9\s_.-]{5,}/", $address)) {
-		die("The address is not valid.");
+		die("alert(\"Please enter a valid address.\");");
 	} elseif (!is_numeric($price)) {
-		die("The price is not valid.");
+		die("alert(\"Please enter a valid price.\");");
 	} else {
 		if(
 			$Requests->addRequest(array(
@@ -26,9 +28,9 @@ if (isset($_GET["add"])) {
 			))
 		)
 		{
-			echo 'Request successfully added!';
+			echo 'alert("Request successfully sent!");';
 		} else {
-			die("An error occured.");
+			die("alert(\"An error occured.\");");
 		}
 	}
 }
