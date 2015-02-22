@@ -1,0 +1,29 @@
+@font-face {
+    font-family: Open Sans;
+    src: url(../font/opensans.tff)
+}
+
+body {
+    font-family: "Open Sans" !important;
+}
+
+#fullscreen-image {
+    min-height: 100%;   
+    background: url(/img/Arion.jpg) no-repeat center center fixed;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    padding-top: 20%;
+}
+.whitetext {
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+#first-title {
+    padding: 1em 0;
+    text-align: center;
+}
+#bold {
+    font-weight: bold;
+
+}
